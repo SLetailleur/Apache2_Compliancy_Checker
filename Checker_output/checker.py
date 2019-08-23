@@ -23,15 +23,15 @@ class Checkers:
 				Siteen_default_path = "/etc/apache2/sites-enabled/"
 				Modsen_default_path = "/etc/apache2/mods-enabled/"
 				status=0
-			elif path.exists("/etc/redhat-release") == True:
+		elif path.exists("/etc/redhat-release") == True:
 				self.Distrib = "Redhat-based"
 				comment = "It\'s all good"
 				status=0
-			elif path.exists("/etc/fedora-release") == True:
+		elif path.exists("/etc/fedora-release") == True:
 				self.Distrib = "Redhat-based"
 				comment = "It\'s all good"
 				status=0
-			else:
+		else:
 				comment="You\'re using unsupported Distrib"
 				status=2
 			out = self.OutputCheck(status)
