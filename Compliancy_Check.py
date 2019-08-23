@@ -12,12 +12,13 @@ def main():
 	Output.append(check.SiteSimpleCheck())
 	Output.append(check.ModsSimpleCheck())
 	Output.append(check.SSLCheck())
+	Output.append(check.EvasiveCheck())
 	table = AsciiTable(Output)
 	print (table.table)
 
 
 if __name__== "__main__":
    main()
-
+[]
 
 

@@ -14,27 +14,28 @@ class Checkers:
 			2: "\033[1;31;40m BAD \033[0m",
 			3: "\033[1;33;40m WARNING \033[0m"}
 		return(switcher.get(var_in, "Invalid input"))
-	
+
 	def OsCheck(self):
 		if path.exists("/etc/debian_version") == True:
-			self.Distrib = "Debian-based"
-			comment = "It\'s all good"
-			Conf_default_path = "/etc/apache2/apache2.conf"
-			Site_default_path = "/etc/apache2/sites-enabled/"
-			status=0
-		elif path.exists("/etc/redhat-release") == True:
-			self.Distrib = "Redhat-based"
-			comment = "It\'s all good"
-			status=0
-		elif path.exists("/etc/fedora-release") == True:
-			self.Distrib = "Redhat-based"
-			comment = "It\'s all good"
-			status=0
-		else:
-			comment="You\'re using unsupported Distrib"
-			status=2
-		out = self.OutputCheck(status)
-		return(["Linux Distrib",self.Distrib,comment,out])
+				self.Distrib = "Debian-based"
+				comment = "It\'s all good"
+				Conf_default_path = "/etc/apache2/apache2.conf"
+				Siteen_default_path = "/etc/apache2/sites-enabled/"
+				Modsen_default_path = "/etc/apache2/mods-enabled/"
+				status=0
+			elif path.exists("/etc/redhat-release") == True:
+				self.Distrib = "Redhat-based"
+				comment = "It\'s all good"
+				status=0
+			elif path.exists("/etc/fedora-release") == True:
+				self.Distrib = "Redhat-based"
+				comment = "It\'s all good"
+				status=0
+			else:
+				comment="You\'re using unsupported Distrib"
+				status=2
+			out = self.OutputCheck(status)
+			return(["Linux Distrib",self.Distrib,comment,out])
 	
 	def VersionCheck(self):
 		if self.Distrib == "Debian-based":
@@ -110,4 +111,20 @@ class Checkers:
 					comment = "It seems you\'re' NOT using SSL. Everything is humad readeable on the network..."
 					status = 2
 			result=["SSL is running ? ",line, comment, self.OutputCheck(status)]
+			return(result)
+	def EvasiveCheck(self):
+		if self.Distrib == "Debian-based":
+			a2currentmods = os.popen('a2query -m').read().rstrip()
+			comment=""
+			i=0
+			status=0
+			for line in a2currentmods.split(os.linesep):
+				if re.search("evasive",str(line)):
+					comment = "It seems you\'re using Evasive Mod!"
+					status = 0
+					break
+				else:
+					comment = "It seems you\'re' NOT using ModEvasive. You love DOS attack ? "
+					status = 2
+			result=["ModEvasive is running ? ",line, comment, self.OutputCheck(status)]
 			return(result)
