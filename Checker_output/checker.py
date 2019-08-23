@@ -128,3 +128,19 @@ class Checkers:
 					status = 2
 			result=["ModEvasive is running ? ",line, comment, self.OutputCheck(status)]
 			return(result)
+	def SecurityCheck(self):
+		if self.Distrib == "Debian-based":
+			a2currentmods = os.popen('a2query -m').read().rstrip()
+			comment=""
+			i=0
+			status=0
+			for line in a2currentmods.split(os.linesep):
+				if re.search("security",str(line)):
+					comment = "It seems you\'re using Security Mod!"
+					status = 0
+					break
+				else:
+					comment = "It seems you\'re' NOT using ModSecurity. You love DOS attack ? "
+					status = 2
+			result=["ModSecurity is running ? ",line, comment, self.OutputCheck(status)]
+			return(result)

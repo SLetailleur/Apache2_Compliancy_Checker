@@ -13,6 +13,7 @@ def main():
 	Output.append(check.ModsSimpleCheck())
 	Output.append(check.SSLCheck())
 	Output.append(check.EvasiveCheck())
+	Output.append(check.SecurityCheck())
 	table = AsciiTable(Output)
 	print (table.table)
 
