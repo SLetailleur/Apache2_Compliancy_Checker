@@ -34,8 +34,8 @@ class Checkers:
 		else:
 				comment="You\'re using unsupported Distrib"
 				status=2
-			out = self.OutputCheck(status)
-			return(["Linux Distrib",self.Distrib,comment,out])
+		out = self.OutputCheck(status)
+		return(["Linux Distrib",self.Distrib,comment,out])
 	
 	def VersionCheck(self):
 		if self.Distrib == "Debian-based":
